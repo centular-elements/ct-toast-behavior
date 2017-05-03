@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`ct-toast-behavior`
+Element to handle toast notification behaviour on the Centular platform
+
+@demo demo/index.html 
+-->
+
+<dom-module id="ct-toast-behavior">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'ct-toast-behavior',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'ct-toast-behavior',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
