@@ -18,16 +18,6 @@
                 toastClasses = toastElem.classList,
                 actionButton = Polymer.dom(toastElem).querySelector('paper-button');
 
-//            if(toastElem.opened){
-//                console.log('called');
-//                toastElem.toggle();
-//                this.async(function(){
-//                    toastElem.show(settingsObj.message);
-//                }, 2000);
-//            } else {
-//                toastElem.show(settingsObj.message);
-//            }
-
             toastClasses.remove("info", "success", 'warning', 'danger');
 
             switch(settingsObj.type) {
@@ -53,9 +43,6 @@
             } else {
                 toastElem.show({text: settingsObj.message, duration: -1})
             }
-
-            console.log('duration', toastElem.duration)
-
 
             function _clickHandler(){
                 this.fire('ct-page-to', settingsObj.actionUrl);
