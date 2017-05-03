@@ -38,11 +38,13 @@
             }
 
 
-            if(settingsObj.type === 'success') {
-                toastElem.show({text: settingsObj.message, duration: 1000})
-            } else {
-                toastElem.show({text: settingsObj.message, duration: -1})
-            }
+//            if(settingsObj.type === 'success') {
+//                toastElem.show({text: settingsObj.message, duration: 1000})
+//            } else {
+//                toastElem.show({text: settingsObj.message, duration: -1})
+//            }
+
+            toastElem.show(settingsObj.message);
 
             function _clickHandler(){
                 this.fire('ct-page-to', settingsObj.actionUrl);
