@@ -1,34 +1,68 @@
-<link rel="import" href="../polymer/polymer.html">
+<script>
 
-<!--
-`ct-toast-behavior`
-Element to handle toast notification behaviour on the Centular platform
+    /**
+     * @polymerBehavior CT.Behaviours.Toast
+     */
 
-@demo demo/index.html 
--->
+    window.CT = window.CT || {};
+    window.CT.Behaviours = window.CT.Behaviours || {};
+    CT.Behaviours.Toast = {
 
-<dom-module id="ct-toast-behavior">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]</h2>
-  </template>
-
-  <script>
-    Polymer({
-
-      is: 'ct-toast-behavior',
-
-      properties: {
-        prop1: {
-          type: String,
-          value: 'ct-toast-behavior',
+        listeners: {
+            'toast': '_toast',
         },
-      },
 
-    });
-  </script>
-</dom-module>
+        _toast: function(event) {
+            var settingsObj = event.detail,
+                toastElem = this.$.toast,
+                toastClasses = toastElem.classList,
+                actionButton = Polymer.dom(toastElem).querySelector('paper-button');
+
+//            if(toastElem.opened){
+//                console.log('called');
+//                toastElem.toggle();
+//                this.async(function(){
+//                    toastElem.show(settingsObj.message);
+//                }, 2000);
+//            } else {
+//                toastElem.show(settingsObj.message);
+//            }
+
+            toastClasses.remove("info", "success", 'warning', 'danger');
+
+            switch(settingsObj.type) {
+                case 'info':
+                case 'success':
+                case 'warning':
+                case 'danger':
+                    toastClasses.add(settingsObj.type);
+                    break;
+            }
+
+            if(settingsObj.actionLabel && settingsObj.actionUrl) {
+                actionButton.style.display = "block";
+                actionButton.textContent = settingsObj.actionLabel;
+                actionButton.onclick = _clickHandler.bind(this);
+            } else {
+                actionButton.style.display = "none";
+            }
+
+
+            if(settingsObj.type === 'success') {
+                toastElem.show({text: settingsObj.message, duration: 1000})
+            } else {
+                toastElem.show({text: settingsObj.message, duration: -1})
+            }
+
+            console.log('duration', toastElem.duration)
+
+
+            function _clickHandler(){
+                this.fire('ct-page-to', settingsObj.actionUrl);
+                this.$.toast.close();
+            }
+
+        },
+
+    };
+</script>
