@@ -14,7 +14,7 @@
 
         _toast: function(event) {
             var settingsObj = event.detail,
-                toastElem = this.$.toast,
+                toastElem = this.$$('#toast'),
                 toastClasses = toastElem.classList,
                 actionButton = Polymer.dom(toastElem).querySelector('paper-button');
 
@@ -48,7 +48,7 @@
 
             function _clickHandler(){
                 this.fire('ct-page-to', settingsObj.actionUrl);
-                this.$.toast.close();
+                this.$$('#toast').close();
             }
 
         },
